@@ -1,0 +1,70 @@
+{% extends "layout/base.html" %}
+
+{% block title %}
+List of Student
+{% endblock title %}
+
+{% block content %}
+
+{% include "include/navbar.html" %}
+<div class="mb-5"></div>
+{% include "include/messages.html" %}
+
+<div class="col-md-7 mx-auto border border-white rounded-4 py-5 px-5 bg-dark">
+    <div class="table-responsive ">
+        <table class="table table-hover table-dark table-striped ">
+            <form method="GET" action="/students">
+                <div class="input-group mb-5 mr-5 px-5">
+                    <input class="form-control" type="search" name="academic_list" placeholder="Search" aria-label="Search" value="{{ query }}">
+                    <button class="btn btn-outline-success btn-primary text-white" type="submit">Search</button>
+                </div>
+            </form >
+            <thead >
+                <tr>
+                    <th>Student ID</th>
+                    <th>Course</th>
+                    <th>YearLevel</th>
+                    <th>Units</th>
+                    <th>Schiool Year</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody >
+               {% for academic in academics %}
+                    <tr>
+                        <td>{{ academic.student_id }}</td>
+                        <td>{{ academic.course }}</td>
+                        <td>{{ academic.year }}</td>
+                        <td>{{ academic.unit }}</td>
+                        <td>{{ academic.school_year}}</td>
+                        <td>
+                            <div class="btn-group">
+                                <a href="/academic/show/{{ academic.student_id }}" class="btn btn-primary">View</a>
+                                <a href="/academic/edit/{{ academic.student_id }}" class="btn btn-success">Edit</a>
+                                <a href="/academic/delete/{{ academic.student_id }}" class="btn btn-danger">Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+               {% endfor %}
+            </tbody>
+        </table>
+        <ul class="pagination">
+            {% if academics.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?{% if query %}student_list={{ query }}&amp;{% endif %}page={{ academics.previous_page_number }}">Previous</a>
+                </li>
+            {% else %}
+                <li class="page-item disabled"><a class="page-link">Previous</a></li>
+            {% endif %}
+
+            {% if academics.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?{% if query %}student_list={{ query }}&amp;{% endif %}page={{ academics.next_page_number }}">Next</a>
+                </li>
+            {% else %}
+                <li class="page-item disabled"><a class="page-link">Next</a></li>
+            {% endif %}
+        </ul>
+    </div>
+</div>
+{% endblock content %}

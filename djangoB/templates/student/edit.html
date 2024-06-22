@@ -1,0 +1,73 @@
+{% extends "layout/base.html" %}
+
+{% block title %} 
+Edit Gender 
+{% endblock title %}
+
+{% block content %}
+{% include "include/navbar.html" %}
+<div class="pt-5"></div>
+<div class="col-md-5 mx-auto mt-3 text-black pt-5 border border-white rounded-4 bg-light">
+    <div class="text-center pb-4">
+        <h1>STUDENT'S PROFILE</h1>
+    </div>
+    <form action="/student/update/{{ student.student_id }}" method="post">
+        {% csrf_token %}
+        <div class="col-md-4 mx-auto mt-3">
+            <form action="/student/update/{{ student.student_id }}" method="post">
+                {% csrf_token %}
+                <div class="mb-3  mx-5">
+                    <label for="first_name">First Name</label>
+                    <input type="text" class="form-control" id="first_name" name="first_name" value="{{ student.first_name }}"  />
+                </div>
+                <div class="mb-3 mx-5">
+                    <label for="middle_name">Middle Name</label>
+                    <input type="text" class="form-control" id="middle_name" name="middle_name" value="{{ student.middle_name }}" />
+                </div>
+                <div class="mb-3 mx-5">
+                    <label for="last_name">Last Name</label>
+                    <input type="text" class="form-control" id="last_name" name="last_name" value="{{ student.last_name }}"  />
+                </div>
+                <div class="mb-3  mx-5">
+                    <label for="course_id">Course</label>
+                    <select name="course_id" id="course_id" class="form-select">
+                        <option value="">N/A</option>
+                        {% for course in courses %}
+                            <option value="{{ course.course_id }}">{{ course.course }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="mb-3 mx-5">
+                    <label for="gender_id">Gender</label>
+                    <select name="gender_id" id="gender_id" class="form-select">
+                        <option value="">N/A</option>
+                        <option value="{{ student.gender_id }}" select hidden>{{ student.gender }}</option>
+                        {% for gender in genders %}
+                            <option value="{{ gender.gender_id }}" {% if gender.gender_id == student.gender_id %}selected{% endif %}>{{ gender.gender }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="mb-3 mx-5">
+                    <label for="section_id">Section</label>
+                    <select name="section_id" id="section_id" class="form-select">
+                        <option value="">N/A</option>
+                        <option value="{{ student.section_id }}" select hidden>{{ student.section }}</option>
+                        {% for course in courses %}
+                            <option value="{{ section.section_id }}" {% if section.section_id == student.section_id %}selected{% endif %}>{{ section.section }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="mb-3 mx-5">
+                    <label for="address">Address</label>
+                    <input type="text" class="form-control" id="address" name="age" value="{{ student.address }}" />
+                </div>
+                <div class="mb-3 mx-5">
+                    <button type="submit" class="btn btn-success float-end col-12 col-md-3">Update</button>
+                    <a href="/students" class="btn btn-secondary float-end col-12 col-md-3 me-1">Back</a>
+                </div>
+                <div class="mb-5"></div>
+                <div class="mb-5"></div>
+    </form>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,20 @@
+{% extends "layout/base.html" %}
+
+{% block title %}
+Delete YearLevel
+{% endblock title %}
+
+{% block content %}
+<div class="pt-5"></div>
+<div class="col-md-6 mx-auto bg-dark border border-white rounded-4 bg-dark py-5">
+    <h1 class="text-center">Delete Year</h1>
+    <div class="input-group justify-content-center ">
+        <p>Are you sure you want to delete this year? This action cannot be undone.</p>
+        <form action="/year/destroy/{{ year.year_id }}" method="post">
+         {% csrf_token %}
+            <button type="submit" class="btn btn-danger float-end">Yes</button>
+            <a href="/years" class="btn btn-secondary float-end">No</a>
+        </form>
+    </div>
+</div>
+{% endblock content %}

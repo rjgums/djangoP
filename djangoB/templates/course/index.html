@@ -1,0 +1,49 @@
+{% extends "layout/base.html" %}
+
+{% block title %}
+List of Course 
+
+{% endblock title %}
+
+{% block content %}
+
+{% include "include/navbar.html" %}
+
+<div class="mb-5"></div>
+
+{% include "include/messages.html" %}
+<div class="col-md-8 mx-auto rounded-5 pt-5 px-5 mt-5 bg-primary">
+    <div class="table-responsive bg-white text-white">
+        <table class="table table-hover table-white table-striped">
+            <thead>
+                <tr>
+                    <th>Course ID</th>
+                    <th>Course</th>
+                    <th>Date Created</th>
+                    <th>Date Updated</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for course in courses %}
+                    <tr>
+                        <td>{{ course.course_id }}</td>
+                        <td>{{ course.course }}</td>
+                        <td>{{ course.created_at }}</td>
+                        <td>{{ course.updated_at }}</td>
+                        <td>
+                            <div class="btn-group">
+                                <a href="/course/show/{{ course.course_id }}" class="btn btn-primary">View</a>                               
+                                <a href="/course/edit/{{ course.course_id }}" class="btn btn-success">Edit</a>
+                                <a href="/course/delete/{{ course.course_id }}" class="btn btn-danger">Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <a href="/courses/create" class="btn btn-success float-end mx-auto my-4">Add Course</a>
+</div>
+
+{% endblock content %}

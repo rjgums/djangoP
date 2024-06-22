@@ -1,0 +1,39 @@
+{% extends "layout/base.html" %}
+
+{% block title %}
+View Academic
+{% endblock title %}
+
+{% block content %}
+<div class="mb-5"></div>
+<div class="col-md-4 mx-auto mt-3 text-white pt-5 border border-white rounded-4 bg-dark">
+    <div class="text-center pb-4 ">
+        <h1>ACADEMIC</h1>
+    </div>
+    <form action="/acadeemic/store" method="post">
+        {% csrf_token %}
+        <div class="mb-3  mx-5">
+            <label for="course">Course</label>
+            <input type="text" class="form-control" id="course" name="course" value="{{ academic.course }}" readonly/>
+        </div>
+        <div class="mb-3 mx-5">
+            <label for="age">YearLevel</label>
+            <input type="text" class="form-control" id="year" name="year" value="{{ academic.year }}" readonly/>
+        </div>
+        <div class="mb-3  mx-5">
+            <label for="unit">Units</label>
+            <input type="text" class="form-control" id="unit" name="unit" value="{{ academic.unit }}" readonly/>
+        </div>
+        <div class="mb-3  mx-5">
+            <label for="school_year">School Year</label>
+            <input type="text" class="form-control" id="school_year" name="school_year" value="{{ academic.school_year }}" readonly/>
+        </div>
+        <div class="mb-3  mx-5" >
+            <a href="/academics" class="btn btn-secondary float-end col-12 col-md-3 me-1">Back</a>
+        </div>
+        <div class="mb-5" >.</div>
+        <div class="mb-5"></div>
+    </form>
+</div>
+
+{% endblock content %}

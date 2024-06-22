@@ -1,0 +1,50 @@
+{% extends "layout/base.html" %}
+
+{% block title %}
+List of Gender
+{% endblock title %}
+
+{% block content %}
+
+{% include "include/navbar.html" %}
+<div class="mb-5"></div>
+
+<a href="genders/create" class="btn btn-primary float-end mt-1 me-1"> Add Gender</a>
+<a href="/" class="btn btn-secondary float-end mt-1 me-1">Back</a>
+{% include 'include/messages.html' %}
+<div class="mx-auto p-2" style="width: 1000px;">
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Gender ID</th>
+                    <th>Gender</th>
+                    <th>Date Created</th>
+                    <th>Date Updated</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for gender in genders  %}
+                <tr>
+                    <td>{{gender.gender_id}}</td>
+                    <td>{{gender.gender}}</td>
+                    <td>{{gender.created_at}}</td>
+                    <td>{{gender.updated_at}}</td>
+                    <td>
+                        <div class="btn-group" >
+                            <a href="genders/show/{{gender.gender_id}}"class="btn btn-primary">View</a>
+                            <a href="genders/edit/{{gender.gender_id}}" class="btn btn-success">Edit</a>
+                            <a href="genders/delete/{{gender.gender_id}}" class="btn btn-danger">Delete</a>
+                        </div>
+                    </td>
+                </tr>
+                
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock content %}
+

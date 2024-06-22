@@ -1,0 +1,51 @@
+{% extends "layout/base.html" %}
+
+{% block title %} 
+Create Academic
+{% endblock title %}
+
+{% block content %}
+
+{% include "include/messages.html" %}
+<div class="mb-5"></div>
+<div class="col-md-4 mx-auto mt-3 text-white pt-5 border border-white rounded-4 bg-dark">
+    <div class="text-center pb-4 ">
+        <h1>ACADEMIC</h1>
+    </div>
+    <form action="/academic/store" method="post">
+        {% csrf_token %}
+        <div class="mb-3  mx-5">
+            <label for="course_id">Course</label>
+            <select name="course_id" id="course_id" class="form-select">
+                <option value="">N/A</option>
+                {% for course in courses %}
+                    <option value="{{ course.course_id }}">{{ course.course }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3  mx-5">
+            <label for="year_id">YearLevel</label>
+            <select name="year_id" id="year_id" class="form-select">
+                <option value="">N/A</option>
+                {% for year in years %}
+                    <option value="{{ year.year_id }}">{{ year.year }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3  mx-5">
+            <label for="unit">Units</label>
+            <input type="text" class="form-control" id="unit" name="unit" />
+        </div>
+        <div class="mb-3  mx-5">
+            <label for="school_year">School Year</label>
+            <input type="text" class="form-control" id="school_year" name="school_year" />
+        </div>
+        <div class= "mb-3  mx-5">
+            <button type="submit" class="btn btn-success float-end col-12 col-md-3">Save</button>
+        </div>
+        <div class="mb-5" >.</div>
+        <div class="mb-5"></div>
+    </form>
+</div>
+
+{% endblock content %}

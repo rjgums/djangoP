@@ -1,0 +1,22 @@
+{% extends "layout/base.html" %}
+
+{% block title %} 
+Create Course 
+{% endblock title %}
+
+{% block content %}
+
+{% include "include/navbar.html" %}
+<div class="col-md-4 mx-auto mt-3 text-black">
+    <form action="/course/store" method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="course">Course</label>
+            <input type="text" class="form-control" id="course" name="course" />
+        </div>
+        <button type="submit" class="btn btn-success float-end col-12 col-md-3">Save Course</button>
+        <a href="/courses" class="btn btn-secondary float-end col-12 col-md-3 me-1"> Back</a>
+    </form>
+</div>
+
+{% endblock content %}
